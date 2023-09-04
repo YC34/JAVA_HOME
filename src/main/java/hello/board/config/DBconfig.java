@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +97,7 @@ public class DBconfig {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception{
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mapper/**/*Mapper.xml"));
+        factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mapper/**.xml"));
 
         /**
          *  mapper파일은 어디서 가져오나.
@@ -108,7 +109,6 @@ public class DBconfig {
          * **/
 
         factoryBean.setTypeAliasesPackage("hello.board.dto");
-
         return factoryBean.getObject();
     }
 
@@ -123,7 +123,6 @@ public class DBconfig {
      * **/
     @Bean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) throws Exception{
-
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
