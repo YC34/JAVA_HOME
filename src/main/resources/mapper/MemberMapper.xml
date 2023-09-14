@@ -3,7 +3,7 @@
 <mapper namespace="hello.board.mapper.MemberMapper">
 
     <insert id="insertMember" parameterType="hello.board.dto.MemberDto" >
-        INSERT INTO test.member (
+        INSERT INTO "Board".member (
               name
             , id
             , phone

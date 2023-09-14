@@ -9,6 +9,10 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.reactive.server.StatusAssertions;
+import org.springframework.test.web.servlet.MockMvc;
+
 
 
 @SpringBootTest
@@ -31,10 +35,11 @@ class BoardApplicationTests {
         m1.setPhone("010-2999-2452");
         log.info("m1 ={}",m1);
 
-       memberMapper.insertMember(m1);
-
-
+//       memberMapper.insertMember(m1);
 
     }
+
+
+
 
 }
