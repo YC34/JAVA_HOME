@@ -90,12 +90,12 @@ public class SecurityConfig{
 //    }
 
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        User
-                .withUsername("xxx")
-                .password("")
-        return new InMemoryUserDetailsManager();
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        User
+//                .withUsername("xxx")
+//                .password("")
+//        return new InMemoryUserDetailsManager();
+//    }
 
 }
