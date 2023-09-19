@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -44,12 +47,34 @@ SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
             csrf -> {
                 csrf.disable();
             });
-    // TODO 05. cors 사용법 숙지하기.
-    http.cors(
-            cors->{
-               cors.disable();
-            });
+//
+//    http.cors(
+//            cors->{
+//               cors.disable();
+//            });
     return http.build();
     }
+
+
+    /**
+     *
+     * CORS 설정
+     * global 설정 (모든 컨트롤러(restcontroller 포함)와 모든 resource에 적용.)
+     * local 설정 (특정한 메소드나 요청에만 설정 할 수 있음? )>> 공부 필요.
+     * **/
+
+    // 05. CORS적용.. localhost:9000에서 들어오는 모든 요청 허용.
+    @Bean
+    public WebMvcConfigurer corsConfigrer(){
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("*")
+                        .allowedOrigins("http://localhost:9000");
+            }
+        };
+    }
+
 
 }
