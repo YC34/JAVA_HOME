@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,12 @@ public class MemberController {
 
     @Autowired
     private MemberMapper mapper;
+    @GetMapping("/hello-world")
+    public String hello(){
+        return "helloworld";
+    }
+
+
 
     private final Logger log = LoggerFactory.getLogger(getClass());
     @PostMapping

@@ -1,105 +1,55 @@
 package hello.board.config;
 
 
-import jakarta.servlet.DispatcherType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{
 /**
- * Spring boot Security !!! 공부하기.
- * 변경된 사항 반영하기.
+ *
+ * SpringBootWebSecurityConfiguration클래스를 참조함.
+ * API만 사용할 것이기 떄문에 CSRF disabled함.
+ * 스프링 시큐리티 바뀐 부분 체크 (https://docs.spring.io/spring-security/reference/reactive/exploits/csrf.html)
  *
  * **/
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+@Bean
+SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
+
+    // 01. 인증에 대한 로직 작성. 빌더로 작성된 {}안에 로직 작성.
+    http.authorizeHttpRequests(
+            auth ->{
+                auth.anyRequest().authenticated();
+            });
+
+
+    //    http.formLogin(withDefaults());   form로그인 사용하지 않을 예정
+    // 02. session사용 여부에 대한 config
+    http.sessionManagement(
+            session->{
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            });
+
+    // 03. httpBasic 기본 사용
+    http.httpBasic(withDefaults());
+    // 04. api만 사용하기 때문에 csrf 사용 해제
+    http.csrf(
+            csrf -> {
+                csrf.disable();
+            });
+    // TODO 05. cors 사용법 숙지하기.
+    http.cors(
+            cors->{
+               cors.disable();
+            });
+    return http.build();
     }
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.csrf().disable().cors().disable()
-//                .authorizeHttpRequests(request -> request.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-//                )
-//                .formLogin(login->login
-//                        .loginPage("/view/login")
-//                        .loginProcessingUrl("login-process")
-//                        .usernameParameter("userId")
-//                        .defaultSuccessUrl("/")
-//                        .permitAll()
-//                        .failureUrl("/view/login-error")
-//                )
-//                .logout(Customizer.withDefaults());
-//
-//        return http.getOrBuild();
-//    }
-
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        http.authorizeHttpRequests(
-                auth->{
-                    auth.anyRequest().authenticated();
-                });
-
-        // session 사용 해제
-        http.sessionManagement(
-                session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
-//        http.formLogin();
-
-        http.httpBasic();
-        http.csrf().disable();
-        return http.getOrBuild();
-    }
-
-
-    /**
-     *
-     * CORS CONFIG
-     *
-     * **/
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer(){
-//        return new WebMvcConfigurer() {
-//            public void addCorsMappings(CorsRegistry registry){
-//                registry.addMapping("/**")
-//                        .allowedMethods("*")
-//                        .allowedOrigins("http://localhost:9000");
-//            }
-//        }
-//    }
-
-
-//    @Bean
-//    public UserDetailsService userDetailsService(){
-//        User
-//                .withUsername("xxx")
-//                .password("")
-//        return new InMemoryUserDetailsManager();
-//    }
-
-
-/**
- * git test
- * **/
 }

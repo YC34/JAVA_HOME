@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class viewController {
 
     private static final Logger log = LoggerFactory.getLogger(viewController.class);
+
+
     @GetMapping("/login")
     public String loginPage(){
         return "login";
@@ -39,3 +41,4 @@ public class viewController {
     }
 
 }
+
