@@ -3,14 +3,16 @@
 <mapper namespace="hello.board.mapper.MemberMapper">
 
     <insert id="insertMember" parameterType="hello.board.dto.MemberDto" >
-        INSERT INTO "Board".member (
+        INSERT INTO "Board".user (
               name
-            , id
+            , user_id
             , phone
+            , password
             ) VALUES (
               #{name}
-            , #{id}
+            , #{userId}
             , #{phone}
+            , #{password}
            )
     </insert>
 

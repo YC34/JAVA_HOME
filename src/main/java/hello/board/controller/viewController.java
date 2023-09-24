@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
-@RequestMapping("/view")
 public class viewController {
 
     private static final Logger log = LoggerFactory.getLogger(viewController.class);
@@ -24,20 +24,18 @@ public class viewController {
 
     @GetMapping("/login-error")
     public String loginError(Model model){
-        model.addAttribute("login-error","로그인이 잘몰 되었습니다.");
+        model.addAttribute("login-error","로그인이 잘못 되었습니다.");
         return "login";
     }
 
-    @GetMapping("/dashboard")
-    public String dashboardPage(MemberDto dto,Model model){
-        log.info("id : {}",dto.getId());
-        log.info("phone : {}",dto.getPhone());
+    @PostMapping("/dashboard")
+    public String dashboardPage(@RequestParam("userId") String userId,
+                                @RequestParam("password") String password){
+        log.info("id : {}",userId);
+        log.info("phone : {}",password);
 
 
-        model.addAttribute("userId",dto.getId());
-        model.addAttribute("phone",dto.getPhone());
-
-        return "dashboard";
+        return " redirect:/view/dashboard";
     }
 
 }
