@@ -1,8 +1,12 @@
 package com.example.demo;
 
-import com.example.demo.entity.Question;
-import com.example.demo.repository.QuestionRepository;
+import com.example.demo.answer.entity.Answer;
+import com.example.demo.question.entity.Question;
+import com.example.demo.answer.repository.AnswerRepository;
+import com.example.demo.question.repository.QuestionRepository;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,12 +14,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class QuestionTest {
     @Autowired
     private QuestionRepository questionRepository;
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
     @Test
     void insertQuestion() {
         Question q1 = new Question();
@@ -98,11 +106,68 @@ class QuestionTest {
          *
          * **/
 
+        Optional<Question> uq = this.questionRepository.findById(1);
+        Question data = uq.get();
+        log.info("select : {} ",data.getSubject());
+
+        data.setSubject("수정된 제목");
+        this.questionRepository.save(data);
+
+        log.info("select : {} ", data.getSubject());
 
 
 
 
     }
+
+
+    @Test
+    void deleteQuestion(){
+
+        /**
+         * 데이터 총 건수 확인 후 삭제
+         *
+         * **/
+
+        assertEquals(2,questionRepository.count());
+        Optional<Question> uq = this.questionRepository.findById(1);
+        // Optional에 값이 있는지만 체크 있으면 true , 없으면 false를 반환한다.
+        assertTrue(uq.isPresent());
+
+        Question data = uq.get();
+        this.questionRepository.delete(data);
+        assertEquals(1,questionRepository.count());
+
+    }
+
+
+    /**
+     *
+     * Answer 테이블에 답변 생성
+     *
+     * **/
+
+    @Autowired
+    private AnswerRepository answerRepository;
+
+    @Test
+    void insertAnswer(){
+        // 1번 아이디는 삭제 하였다.
+        Optional<Question> sq = this.questionRepository.findById(2);
+        // 존재하는지 확인
+        assertTrue(sq.isPresent());
+        Question data = sq.get();
+
+        Answer as = new Answer();
+        as.setContent("네 자동으로 생성됩니다.");
+        as.setQuestion(data);
+        as.setCreateDate(LocalDateTime.now());
+        this.answerRepository.save(as);
+
+        assertEquals(1,this.answerRepository.count());
+
+    }
+
 
 
 }
