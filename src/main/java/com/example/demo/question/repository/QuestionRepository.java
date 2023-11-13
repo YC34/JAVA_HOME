@@ -1,6 +1,8 @@
 package com.example.demo.question.repository;
 
 import com.example.demo.question.entity.Question;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -39,6 +41,15 @@ public interface QuestionRepository extends JpaRepository<Question,Integer> {
 
     List<Question> findBySubjectLike(String subject);
 
+
+
+    /**
+     *
+     * @param pageable
+     * @description JPA에서 지원하는 Page객체를 이용한 paging처리
+     *
+     * **/
+    Page<Question> findAll(Pageable pageable);
 
 
 

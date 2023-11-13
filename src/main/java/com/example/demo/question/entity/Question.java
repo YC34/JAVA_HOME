@@ -2,6 +2,7 @@ package com.example.demo.question.entity;
 
 
 import com.example.demo.answer.entity.Answer;
+import com.example.demo.user.entity.UserAccount;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,5 +29,8 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+
+    @ManyToOne
+    private UserAccount author;
 
 }

@@ -1,6 +1,7 @@
 package com.example.demo.answer.entity;
 
 import com.example.demo.question.entity.Question;
+import com.example.demo.user.entity.UserAccount;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,4 +23,7 @@ public class Answer {
     private LocalDateTime createDate;
     @ManyToOne
     private Question question;
+
+    @ManyToOne
+    private UserAccount author;
 }

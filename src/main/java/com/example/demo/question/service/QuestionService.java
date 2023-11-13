@@ -4,7 +4,11 @@ package com.example.demo.question.service;
 import com.example.demo.exception.DataNotFoundException;
 import com.example.demo.question.entity.Question;
 import com.example.demo.question.repository.QuestionRepository;
+import com.example.demo.user.entity.UserAccount;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -35,12 +39,19 @@ public class QuestionService {
 
 
 
-    public void create(String subject, String content) {
+    public void create(String subject, String content, UserAccount userAccount) {
         Question q = new Question();
         q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
+        q.setAuthor(userAccount);
         this.questionRepository.save(q);
+    }
+
+
+    public Page<Question> getList(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.questionRepository.findAll(pageable);
     }
 
 }
