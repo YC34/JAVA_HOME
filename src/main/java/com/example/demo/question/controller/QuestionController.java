@@ -1,6 +1,6 @@
 package com.example.demo.question.controller;
 
-import com.example.demo.answer.dto.AnserFormDto;
+import com.example.demo.answer.dto.AnswerFormDto;
 import com.example.demo.question.dto.QuestionFormDto;
 import com.example.demo.question.entity.Question;
 import com.example.demo.question.service.QuestionService;
@@ -17,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/question")
@@ -39,7 +38,7 @@ public class QuestionController {
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model
                        , @PathVariable("id") Integer id
-                       , AnserFormDto anserFormDto) {
+                       , AnswerFormDto answerFormDto) {
         Question question = this.service.getQuestion(id);
         model.addAttribute("question",question);
 

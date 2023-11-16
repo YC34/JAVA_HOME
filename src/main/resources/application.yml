@@ -1,20 +1,17 @@
-## ?? ??
+## server ??
 server:
   servlet:
     encoding:
       charset: UTF-8
       enabled: true
       force: true
-
   port: 9092
-
 
 ## DB Connect test
 spring:
   datasource:
     hikari:
       maximum-pool-size: 4
-
     url: jdbc:postgresql://localhost:5432/java
     username: y_chan
     password: 1234
@@ -22,7 +19,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
     properties:
       hibernate:
         format_sql=true:

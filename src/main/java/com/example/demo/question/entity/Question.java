@@ -10,6 +10,14 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
+/**
+ *
+ * Entity
+ * DB의 테이블과 1:1맵핑되는 클래스 table명을 명시해 줄 수 도 있다.
+ * 각종 어노테이션을 통해 , 옵션을 지정할 수 있다.
+ *
+ * **/
 @Getter
 @Setter
 @Entity

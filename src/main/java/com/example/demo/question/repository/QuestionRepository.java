@@ -7,6 +7,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
+
+
+/**
+ *
+ * mybatis와는 다르게, JPA는 ORM(Object Relational Mapping)을 사용하여
+ * 개발자가 바뀌어도 통일된 쿼리를 작성할 수 있고 오류 발생률도 줄일 수 있다.
+ * entity에 의해 생성된 테이블에 대한 CRUD를 하기 위한 인터페이스.
+ *
+ * **/
 public interface QuestionRepository extends JpaRepository<Question,Integer> {
 
 

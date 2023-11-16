@@ -1,7 +1,7 @@
 package com.example.demo.answer.controller;
 
 
-import com.example.demo.answer.dto.AnserFormDto;
+import com.example.demo.answer.dto.AnswerFormDto;
 import com.example.demo.answer.service.AnswerService;
 import com.example.demo.question.entity.Question;
 import com.example.demo.question.service.QuestionService;
@@ -30,7 +30,7 @@ public class AnswerController {
     @PostMapping("/create/{id}")
     public String createAnswer(Model model
                              , @PathVariable("id") Integer id
-                             , @Valid AnserFormDto AnserFormDto
+                             , @Valid AnswerFormDto answerFormDto
                              , BindingResult bindingResult
                              , Principal principal){
 
@@ -42,7 +42,7 @@ public class AnswerController {
         }
 
 
-        answerService.create(AnserFormDto.getContent(),question,userAccount);
+        answerService.create(answerFormDto.getContent(),question,userAccount);
         return String.format("redirect:/question/detail/%s",id);
 
     }
