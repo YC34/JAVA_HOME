@@ -1,0 +1,34 @@
+## server info
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  port: 9095
+
+## DB Connect test
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://localhost:5432/api
+    username: api_admin
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql=true:
+
+
+
+
+## jwt
+
+  jwt:
+    key: secret-key
+    live:
+      atk: 300000
