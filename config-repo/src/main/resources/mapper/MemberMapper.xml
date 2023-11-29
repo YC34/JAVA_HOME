@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hello.board.mapper.MemberMapper">
+
+    <insert id="insertMember" parameterType="hello.board.dto.MemberDto" >
+        INSERT INTO "Board".user (
+              name
+            , user_id
+            , phone
+            , password
+            ) VALUES (
+              #{name}
+            , #{userId}
+            , #{phone}
+            , #{password}
+           )
+    </insert>
+
+
+</mapper>
