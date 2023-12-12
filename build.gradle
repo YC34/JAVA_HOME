@@ -28,6 +28,15 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+
+	//jsp dependency
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+//	implementation 'javax.servlet:jstl'
+
+	// version 문제로 jstl이 적용되지 않았던 문제 확인.
+	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
 }
 
 tasks.named('test') {
