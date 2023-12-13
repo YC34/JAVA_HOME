@@ -12,8 +12,8 @@ Http에 대한 전반적인 이해 및 개념파악.
 4. 참고 강의 : inflearn 김영한
 
 #### 패키지 설명
-1. 최상의 패키지 servlet.basic, servlet.domain, servlet.web
-    basic( servelt에 대한 기초 실습), domain(Entity및 저장소) , web(servlet에 대한 전반적인 실습.)
+1. 최상의 패키지 servlet.basic, servlet.domain, servlet.web, servlet.springmvc
+    basic( servelt에 대한 기초 실습), domain(Entity및 저장소) , web(servlet에 대한 전반적인 실습.),
 2. servlet.web.~은 단계별로 servlet에 대한 이해.
     servlet(servlet을 사용한 간단한 실습), servletmvc(mvc패턴을 이용한 servlet 실습) 
   , frontcontroller(frontcontorller을 도입하여, 단계별로 리펙토링)
@@ -24,6 +24,7 @@ Http에 대한 전반적인 이해 및 개념파악.
    + servlet.web.frontcontroller.v4(controller 단순화. interface의 변화)
    + servlet.web.frontcontroller.v5(유연한 컨트롤러 , 어댑터 패턴, handler 사용, controllerV3,controllerV4사용)
   
+4. servlet.springmvc는 springmvc에서 어노테이션으로 구현된 기술들을 알아본다.
 
 
 ##### 메모
