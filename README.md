@@ -1,4 +1,4 @@
-# Thymeleaf + springmvc
+# springmvc basic
 # start 2023.12.13(수)
 
 #### 요약
