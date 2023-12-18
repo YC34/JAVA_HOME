@@ -1,0 +1,8 @@
+# server port setting
+server:
+  port: 9000
+
+# http logging
+#logging:
+#  level:
+#    org.apache.coyote.http11: debug
